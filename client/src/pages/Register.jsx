@@ -30,6 +30,7 @@ const Register = () => {
                         name="name"
                         value={userData.name}
                         onChange={changeInputHandler}
+                        autoFocus
                     />
 
                     <input
