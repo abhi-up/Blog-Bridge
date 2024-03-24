@@ -135,6 +135,18 @@ section {
     color: var(--color-white);
 }
 
+.center {
+    text-align: center;
+    padding-top: 5rem;
+    margin-inline: auto;
+    display: block;
+    width: 100%;
+}
+
+.error-page h2 {
+    margin-top: 3rem;
+}
+
 /* =================================== NAVBAR ===================================== */
 nav {
     width: 100vw;
