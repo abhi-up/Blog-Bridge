@@ -5,6 +5,7 @@ require("dotenv").config()
 
 const userRoutes = require("./routes/userRoutes.js")
 const postRoutes = require("./routes/postRoutes.js")
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware.js")
 
 const port = process.env.PORT
 const app = express()
@@ -15,6 +16,9 @@ app.use(cors({ credentials: true, origin: "http://localhost:5173" }))
 
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
 
 connect(process.env.MONGO_URI)
     .then(app.listen(port, () => console.log(`Server running on port ${port}`)))
