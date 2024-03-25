@@ -119,7 +119,12 @@ const editUser = async (req, res, next) => {
 // POST: api/users/authors
 // UNPROTECTED
 const getAuthors = async (req, res, next) => {
-    res.json("get all authors/users")
+    try {
+        const authors = await User.find().select("-password")
+        res.json(authors)
+    } catch (error) {
+        return next(new HttpError(error))
+    }
 }
 
 module.exports = {
