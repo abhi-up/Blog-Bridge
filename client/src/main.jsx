@@ -18,7 +18,7 @@ import Dashboard from "./pages/Dashboard"
 import EditPost from "./pages/EditPost"
 import DeletePost from "./pages/DeletePost"
 import Logout from "./pages/Logout"
-import UserProvider from "./context/userContext"
+import UserProvider from "./context/userContext.jsx"
 
 const router = createBrowserRouter([
     {
