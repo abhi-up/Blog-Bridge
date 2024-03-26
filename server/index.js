@@ -8,7 +8,7 @@ const userRoutes = require("./routes/userRoutes.js")
 const postRoutes = require("./routes/postRoutes.js")
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware.js")
 
-const port = process.env.PORT
+const port = process.env.PORT || 5000
 const app = express()
 
 app.use(express.json({ extended: true }))
