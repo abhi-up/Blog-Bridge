@@ -1,5 +1,8 @@
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const fs = require("fs")
+const path = require("path")
+const { v4: uuid } = require("uuid")
 
 const User = require("../models/userModel.js")
 const HttpError = require("../models/errorModel")
@@ -105,7 +108,68 @@ const getUser = async (req, res, next) => {
 // POST: api/users/change-avatar
 // PROTECTED
 const changeAvatar = async (req, res, next) => {
-    res.json("change user avatar")
+    try {
+        if (!req.files.avatar) {
+            return next(new HttpError("Please choose an image.", 422))
+        }
+
+        // find user in db
+        const user = await User.findById(req.user.id)
+        // delete old avatar if exists
+        if (user.avatar) {
+            fs.unlink(
+                path.join(__dirname, "..", "uploads", user.avatar),
+                (err) => {
+                    if (err) {
+                        return next(new HttpError(err))
+                    }
+                }
+            )
+        }
+
+        const { avatar } = req.files
+        // check the file size
+        if (avatar.size > 500000) {
+            return next(
+                new HttpError(
+                    "Profile picture too big. Should be less than 500kb"
+                ),
+                422
+            )
+        }
+
+        let fileName
+        fileName = avatar.name
+        let splittedFileName = fileName.split(".")
+        let newFileName =
+            splittedFileName[0] +
+            uuid() +
+            "." +
+            splittedFileName[splittedFileName.length - 1]
+
+        avatar.mv(
+            path.join(__dirname, "..", "uploads", newFileName),
+            async (err) => {
+                if (err) {
+                    return next(new HttpError(err))
+                }
+
+                const updatedAvatar = await User.findByIdAndUpdate(
+                    req.user.id,
+                    { avatar: newFileName },
+                    { new: true }
+                )
+                if (!updatedAvatar) {
+                    return next(
+                        new HttpError("Avatar couldn't be changed.", 422)
+                    )
+                }
+                res.status(200).json(updatedAvatar)
+            }
+        )
+    } catch (error) {
+        return next(new HttpError(error))
+    }
 }
 
 // ==================== EDIT USER DETAILS ========================
