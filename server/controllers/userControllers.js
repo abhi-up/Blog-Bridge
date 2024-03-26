@@ -128,7 +128,7 @@ const changeAvatar = async (req, res, next) => {
 
         const { avatar } = req.files
         // check the file size
-        if (avatar.size > 500000) {
+        if (avatar.size > 2000000) {
             return next(
                 new HttpError(
                     "Profile picture too big. Should be less than 500kb"
