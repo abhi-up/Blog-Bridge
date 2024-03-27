@@ -27,7 +27,7 @@ const PostAuthor = ({ authorID, createdAt }) => {
     const formattedDate = createdDate.toLocaleDateString("en-GB")
 
     return (
-        <Link to={`/posts/users/sdsdf`} className="post__author">
+        <Link to={`/posts/users/${authorID}`} className="post__author">
             <div className="post__author-avatar">
                 <img
                     src={`http://localhost:5000/uploads/${author?.avatar}`}

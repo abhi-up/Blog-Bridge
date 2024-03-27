@@ -1,22 +1,50 @@
-import React, { useState } from "react"
-import { DUMMY_POSTS } from "../data"
+import React, { useEffect, useState } from "react"
 import PostItem from "../components/PostItem"
+import Loader from "../components/Loader"
+import { useParams } from "react-router-dom"
+import axios from "axios"
 
 const CategoryPosts = () => {
-    const [posts, setPosts] = useState(DUMMY_POSTS)
+    const [posts, setPosts] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+
+    const { category } = useParams()
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios.get(
+                    `http://localhost:5000/api/posts/categories/${category}`
+                )
+                setPosts(response?.data)
+            } catch (err) {
+                console.log(err)
+            }
+
+            setIsLoading(false)
+        }
+
+        fetchPosts()
+    }, [category])
+
+    if (isLoading) {
+        return <Loader />
+    }
 
     return (
-        <section>
+        <section className="posts">
             {posts.length > 0 ? (
                 <div className="container posts__container">
                     {posts.map(
                         ({
-                            id,
+                            _id: id,
                             thumbnail,
                             category,
                             title,
-                            desc,
-                            authorID,
+                            description,
+                            creator,
+                            createdAt,
                         }) => (
                             <PostItem
                                 key={id}
@@ -24,8 +52,9 @@ const CategoryPosts = () => {
                                 thumbnail={thumbnail}
                                 category={category}
                                 title={title}
-                                description={desc}
-                                authorID={authorID}
+                                description={description}
+                                authorID={creator}
+                                createdAt={createdAt}
                             />
                         )
                     )}
