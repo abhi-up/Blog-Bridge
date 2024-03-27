@@ -36,7 +36,7 @@ const createPost = async (req, res, next) => {
             "." +
             splittedFileName[splittedFileName.length - 1]
         thumbnail.mv(
-            path.join(__dirname, "..", "..", "/uploads", newFileName),
+            path.join(__dirname, "..", "/uploads", newFileName),
             async (err) => {
                 if (err) {
                     return next(new HttpError(err))
@@ -154,13 +154,7 @@ const editPost = async (req, res, next) => {
                 // get old post from DB
                 //delete old thumbnail from uploads
                 fs.unlink(
-                    path.join(
-                        __dirname,
-                        "..",
-                        "..",
-                        "uploads",
-                        oldPost.thumbnail
-                    ),
+                    path.join(__dirname, "..", "uploads", oldPost.thumbnail),
                     async (err) => {
                         if (err) {
                             return next(new HttpError(err))
@@ -187,7 +181,7 @@ const editPost = async (req, res, next) => {
                     splittedFileName[splittedFileName.length - 1]
 
                 thumbnail.mv(
-                    path.join(__dirname, "..", "..", "/uploads", newFileName),
+                    path.join(__dirname, "..", "uploads", newFileName),
                     async (err) => {
                         if (err) {
                             return next(new HttpError(err))
@@ -234,7 +228,7 @@ const deletePost = async (req, res, next) => {
         if (req.user.id == post.creator) {
             //delete thumbnail from the upload folder
             fs.unlink(
-                path.join(__dirname, "..", "..", "uploads", fileName),
+                path.join(__dirname, "..", "uploads", fileName),
                 async (err) => {
                     if (err) {
                         return next(new HttpError(err))

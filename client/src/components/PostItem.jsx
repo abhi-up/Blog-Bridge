@@ -9,6 +9,7 @@ const PostItem = ({
     description,
     authorID,
     thumbnail,
+    createdAt,
 }) => {
     const shortDescription =
         description.length > 145
@@ -20,7 +21,10 @@ const PostItem = ({
     return (
         <article className="post">
             <div className="post__thumbnail">
-                <img src={thumbnail} alt={title} />
+                <img
+                    src={`http://localhost:5000/../uploads/${thumbnail}`}
+                    alt={title}
+                />
             </div>
 
             <div className="post__content">
@@ -29,7 +33,7 @@ const PostItem = ({
                 </Link>
                 <p>{shortDescription}</p>
                 <div className="post__footer">
-                    <PostAuthor />
+                    <PostAuthor authorID={authorID} createdAt={createdAt} />
                     <Link
                         to={`/posts/categories/${category}`}
                         className="btn category"
