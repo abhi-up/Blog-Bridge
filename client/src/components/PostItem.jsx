@@ -22,7 +22,7 @@ const PostItem = ({
         <article className="post">
             <div className="post__thumbnail">
                 <img
-                    src={`http://localhost:5000/../uploads/${thumbnail}`}
+                    src={`http://localhost:5000/uploads/${thumbnail}`}
                     alt={title}
                 />
             </div>

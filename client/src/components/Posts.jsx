@@ -36,12 +36,12 @@ const Posts = () => {
                 <div className="container posts__container">
                     {posts.map(
                         ({
-                            id,
+                            _id: id,
                             thumbnail,
                             category,
                             title,
                             description,
-                            authorID,
+                            creator,
                             createdAt,
                         }) => (
                             <PostItem
@@ -51,7 +51,7 @@ const Posts = () => {
                                 category={category}
                                 title={title}
                                 description={description}
-                                authorID={authorID}
+                                authorID={creator}
                                 createdAt={createdAt}
                             />
                         )
