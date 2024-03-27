@@ -31,7 +31,7 @@ const Header = () => {
                     <ul className="nav__menu">
                         <li>
                             <Link to="/profile/sdsd" onClick={closeNavHandler}>
-                                Abhishek Upadhyay
+                                {currentUser?.name}
                             </Link>
                         </li>
                         <li>

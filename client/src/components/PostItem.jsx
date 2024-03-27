@@ -31,7 +31,7 @@ const PostItem = ({
                 <Link to={`/posts/${postID}`}>
                     <h3>{postTitle}</h3>
                 </Link>
-                <p>{shortDescription}</p>
+                <p dangerouslySetInnerHTML={{ __html: shortDescription }} />
                 <div className="post__footer">
                     <PostAuthor authorID={authorID} createdAt={createdAt} />
                     <Link
