@@ -14,24 +14,6 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware.js")
 const port = process.env.PORT || 5000
 const app = express()
 
-app.use((req, res, next) => {
-    res.setHeader(
-        "Content-Security-Policy",
-        "default-src 'self'; connect-src 'self' http://localhost:5000;"
-    )
-    next()
-})
-
-// Use helmet to set the Content Security Policy header
-app.use(
-    helmet.contentSecurityPolicy({
-        directives: {
-            defaultSrc: ["'self'"],
-            connectSrc: ["'self'", "http://localhost:5000"],
-        },
-    })
-)
-
 const allowedOrigins = [
     "http://localhost:5173",
     "https://your-production-frontend-url.com",
