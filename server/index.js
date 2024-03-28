@@ -22,6 +22,16 @@ app.use((req, res, next) => {
     next()
 })
 
+// Use helmet to set the Content Security Policy header
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: ["'self'"],
+            connectSrc: ["'self'", "http://localhost:5000"],
+        },
+    })
+)
+
 const allowedOrigins = [
     "http://localhost:5173",
     "https://your-production-frontend-url.com",
