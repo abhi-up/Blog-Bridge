@@ -15,7 +15,7 @@ const CategoryPosts = () => {
             setIsLoading(true)
             try {
                 const response = await axios.get(
-                    `http://localhost:5000/api/posts/categories/${category}`
+                    `/api/posts/categories/${category}`
                 )
                 setPosts(response?.data)
             } catch (err) {

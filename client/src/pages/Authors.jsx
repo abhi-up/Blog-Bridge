@@ -11,9 +11,7 @@ const Authors = () => {
         const getAuthors = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(
-                    `http://localhost:5000/api/users`
-                )
+                const response = await axios.get(`/api/users`)
                 setAuthors(response.data)
             } catch (error) {
                 console.log(error)
@@ -41,7 +39,7 @@ const Authors = () => {
                             >
                                 <div className="author__avatar">
                                     <img
-                                        src={`http://localhost:5000/uploads/${avatar}`}
+                                        src={`/uploads/${avatar}`}
                                         alt={`Image of ${name}`}
                                     />
                                 </div>

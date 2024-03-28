@@ -18,9 +18,7 @@ const PostDetail = () => {
         const getPost = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(
-                    `http://localhost:5000/api/posts/${id}`
-                )
+                const response = await axios.get(`/api/posts/${id}`)
                 setPost(response.data)
             } catch (error) {
                 setError(error)
@@ -60,10 +58,7 @@ const PostDetail = () => {
 
                     <h1>{post.title}</h1>
                     <div className="post-detail__thumbnail">
-                        <img
-                            src={`http://localhost:5000/uploads/${post.thumbnail}`}
-                            alt=""
-                        />
+                        <img src={`/uploads/${post.thumbnail}`} alt="" />
                     </div>
                     <p
                         dangerouslySetInnerHTML={{ __html: post.description }}

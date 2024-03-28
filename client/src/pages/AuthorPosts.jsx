@@ -14,9 +14,7 @@ const AuthorPosts = () => {
         const fetchPosts = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(
-                    `http://localhost:5000/api/posts/users/${id}`
-                )
+                const response = await axios.get(`/api/posts/users/${id}`)
                 setPosts(response?.data)
             } catch (err) {
                 console.log(err)

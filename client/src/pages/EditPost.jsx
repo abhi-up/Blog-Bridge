@@ -68,9 +68,7 @@ const EditPost = () => {
     useEffect(() => {
         const getPost = async () => {
             try {
-                const response = await axios.get(
-                    `http://localhost:5000/api/posts/${id}`
-                )
+                const response = await axios.get(`/api/posts/${id}`)
                 setTitle(response.data.title)
                 setDescription(response.data.description)
             } catch (error) {
@@ -90,14 +88,10 @@ const EditPost = () => {
         postData.set("thumbnail", thumbnail)
 
         try {
-            const response = await axios.patch(
-                `http://localhost:5000/api/posts/${id}`,
-                postData,
-                {
-                    withCredentials: true,
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            )
+            const response = await axios.patch(`/api/posts/${id}`, postData, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${token}` },
+            })
             if (response.status == 200) {
                 return navigate("/")
             }

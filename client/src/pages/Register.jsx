@@ -24,10 +24,7 @@ const Register = () => {
         setError("")
 
         try {
-            const response = await axios.post(
-                "http://localhost:5000/api/users/register",
-                userData
-            )
+            const response = await axios.post("/api/users/register", userData)
             const newUser = await response.data
             console.log(newUser)
             if (!newUser) {

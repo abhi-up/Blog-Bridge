@@ -32,13 +32,10 @@ const UserProfile = () => {
 
     useEffect(() => {
         const getUser = async () => {
-            const response = await axios.get(
-                `http://localhost:5000/api/users/${currentUser.id}`,
-                {
-                    withCredentials: true,
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            )
+            const response = await axios.get(`/api/users/${currentUser.id}`, {
+                withCredentials: true,
+                headers: { Authorization: `Bearer ${token}` },
+            })
             const { name, email, avatar } = response.data
             setName(name)
             setEmail(email)
@@ -53,7 +50,7 @@ const UserProfile = () => {
             const postData = new FormData()
             postData.set("avatar", avatar)
             const response = await axios.post(
-                `http://localhost:5000/api/users/change-avatar`,
+                `/api/users/change-avatar`,
                 postData,
                 {
                     withCredentials: true,
@@ -79,7 +76,7 @@ const UserProfile = () => {
             userData.set("confirmNewPassword", confirmNewPassword)
 
             const response = await axios.patch(
-                "http://localhost:5000/api/users/edit-user",
+                "/api/users/edit-user",
                 userData,
                 {
                     withCredentials: true,
@@ -106,10 +103,7 @@ const UserProfile = () => {
                 <div className="profile__details">
                     <div className="avatar__wrapper">
                         <div className="profile__avatar">
-                            <img
-                                src={`http://localhost:5000/uploads/${avatar}`}
-                                alt=""
-                            />
+                            <img src={`/uploads/${avatar}`} alt="" />
                         </div>
 
                         {/* form to update avatar */}
