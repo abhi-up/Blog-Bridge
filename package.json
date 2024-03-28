@@ -4,20 +4,21 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "backend": "nodemon server/index.js",
-        "frontend": "npm run dev --prefix client",
-        "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+        "server": "nodemon server/index.js",
+        "start": "node server/index.js",
+        "build": "npm install && npm install --prefix client && npm run build --prefix client"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
+        "compression": "^1.7.4",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
         "express": "^4.19.1",
         "express-fileupload": "^1.5.0",
+        "helmet": "^7.1.0",
         "javascript-time-ago": "^2.5.9",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.2.3",
